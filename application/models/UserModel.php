@@ -23,7 +23,7 @@ class UserModel extends CI_Model
         // Menyimpan data ke dalam tabel 'user'
         $this->db->insert('user', $data);
     }
-    
+
     public function get_all_users()
     {
         return $this->db->get('user')->result();

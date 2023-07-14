@@ -25,32 +25,32 @@ class Home extends CI_Controller
   }
 
   public function tambahRuangan()
-{
+  {
     // Memastikan metode HTTP adalah POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Mengambil data dari form
-        $namaRuangan = $this->input->post('nama_ruangan');
+      // Mengambil data dari form
+      $namaRuangan = $this->input->post('nama_ruangan');
 
-        // Validasi data
-        if (empty($namaRuangan)) {
-            // Jika nama ruangan kosong, tampilkan pesan error sebagai pop-up
-            $data['message'] = 'Nama ruangan harus diisi.';
+      // Validasi data
+      if (empty($namaRuangan)) {
+        // Jika nama ruangan kosong, tampilkan pesan error sebagai pop-up
+        $data['message'] = 'Nama ruangan harus diisi.';
+      } else {
+        // Memuat model RuanganModel
+        $this->load->model('RuanganModel');
+
+        // Memeriksa apakah nama ruangan sudah ada dalam database
+        if ($this->RuanganModel->isNamaRuanganExists($namaRuangan)) {
+          // Jika nama ruangan sudah ada, tampilkan pesan error sebagai pop-up
+          $data['message'] = 'Nama ruangan sudah ada dalam database.';
         } else {
-            // Memuat model RuanganModel
-            $this->load->model('RuanganModel');
+          // Jika data valid, tambahkan ruangan ke database
+          $this->RuanganModel->tambahRuangan($namaRuangan);
 
-            // Memeriksa apakah nama ruangan sudah ada dalam database
-            if ($this->RuanganModel->isNamaRuanganExists($namaRuangan)) {
-                // Jika nama ruangan sudah ada, tampilkan pesan error sebagai pop-up
-                $data['message'] = 'Nama ruangan sudah ada dalam database.';
-            } else {
-                // Jika data valid, tambahkan ruangan ke database
-                $this->RuanganModel->tambahRuangan($namaRuangan);
-
-                // Setelah berhasil menambahkan ruangan, arahkan pengguna kembali ke halaman daftar ruangan
-                redirect('administrator/home');
-            }
+          // Setelah berhasil menambahkan ruangan, arahkan pengguna kembali ke halaman daftar ruangan
+          redirect('administrator/home');
         }
+      }
     }
 
     // Jika tidak ada metode POST atau terdapat kesalahan validasi, tampilkan form tambah ruangan
@@ -60,7 +60,7 @@ class Home extends CI_Controller
     $this->load->view('admin/sidebar');
     $this->load->view('administrator/home', $data);
     $this->load->view('admin/footer');
-}
+  }
 
 
 
@@ -94,7 +94,7 @@ class Home extends CI_Controller
   }
 
   public function deletee()
-{
+  {
     // Memperoleh data dari permintaan POST
     $kode = $this->input->post('kode');
 
@@ -106,9 +106,9 @@ class Home extends CI_Controller
 
     // Menentukan respons berdasarkan hasil operasi database
     if ($result) {
-        $message = 'Ruangan berhasil dihapus';
+      $message = 'Ruangan berhasil dihapus';
     } else {
-        $message = 'Gagal menghapus ruangan';
+      $message = 'Gagal menghapus ruangan';
     }
 
     // Menyimpan pesan sebagai flashdata
@@ -116,13 +116,13 @@ class Home extends CI_Controller
 
     // Redirect ke halaman administrator home
     redirect('administrator/home');
-}
-
-  
+  }
 
 
-public function delete($kode)
-{
+
+
+  public function delete($kode)
+  {
     // Memuat model RuanganModel
     $this->load->model('RuanganModel');
 
@@ -131,13 +131,12 @@ public function delete($kode)
 
     // Menentukan pesan berdasarkan hasil operasi database
     if ($result) {
-        $message = 'Ruangan berhasil dihapus.';
+      $message = 'Ruangan berhasil dihapus.';
     } else {
-        $message = 'Gagal menghapus ruangan.';
+      $message = 'Gagal menghapus ruangan.';
     }
 
     // Memuat kembali halaman daftar ruangan dengan pesan hasil operasi
     redirect('administrator/home?message=' . urlencode($message));
-}
-
+  }
 }

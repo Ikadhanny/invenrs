@@ -132,7 +132,5 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-// $autoload['model'] = array('login_model','user_model','kelas_model','mapel_model','siswa_model','tahunakademik_model','jadwal_model','guru_model','semester_model');
-//$autoload['model'] = array('Login_model','User_model','Kelas_model','Mapel_model','Siswa_model','Tahunakademik_model','Jadwal_model','Guru_model','Semester_model');
-//$autoload['model'] = array('login_model' => 'login','kelas_model' => 'kelas','mapel_model' => 'mapel','siswa_model' => 'siswa','tahunakademik_model' => 'tahunakademik','jadwal_model' => 'jadwal','guru_model' => 'guru','semester_model' => 'semester');
+
 $autoload['model'] = array('Login_model');
