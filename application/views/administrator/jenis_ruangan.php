@@ -13,37 +13,6 @@
                             <span class="ml-2"><?php echo $ruangan->nama; ?></span>
                         </h1>
                     </div>
-                    <div class="col-auto mt-4">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <form class="d-flex" action="<?php echo base_url('administrator/ruangan/tambahRuangan'); ?>" method="POST">
-                                <!-- <input type="text" class="form-control mr-2" placeholder="Cari ruangan..."> -->
-                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-plus"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                    <form action="<?php echo base_url('administrator/ruangan/tambahRuangan'); ?>" method="POST">
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Ruangan Utama</h5>
-                                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <label for="namaRuangan" style="color: black;">Nama Ruangan</label>
-                                        <br><br>
-                                        <input type="text" class="form-control" name="nama_ruangan" placeholder="Masukkan Nama Ruangan" required>
-                                        <input type="hidden" name="kode_utama" value="<?php echo $ruangan->kode; ?>">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button class="btn btn-primary" type="submit">Simpan</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
                     <?php
                     // Retrieve the message from session
                     $message = $this->session->flashdata('message');
@@ -51,8 +20,6 @@
                         echo '<p>' . $message . '</p>';
                     }
                     ?>
-
-
                     <?php if (isset($message)) : ?>
                         <div class="alert alert-danger"><?php echo $message; ?></div>
                     <?php endif; ?>
@@ -77,8 +44,8 @@
                                     <a href="<?php echo base_url('administrator/alat/detail/' . $ruangan_item->kode_ruang); ?>"><?php echo $ruangan_item->nama; ?></a>
                                 </div>
                                 <div>
-                                    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $key; ?>"><i class="fas fa-pencil"></i></button>
-                                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $key; ?>"><i class="fas fa-trash"></i></button>
+                                    <!-- <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $key; ?>"><i class="fas fa-pencil"></i></button>
+                                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $key; ?>"><i class="fas fa-trash"></i></button> -->
                                 </div>
                             </div>
                         </div>

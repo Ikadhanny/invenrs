@@ -78,8 +78,8 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center justify-content-between">
                                                     <div class="h5 card-title mb-0">
-                                                    <a href="<?php echo base_url('user/ruangan/detail/' . $ruangan_item->kode); ?>"><?php echo $ruangan_item->nama; ?></a>  
-                                                    <!-- <a href="detail.html"><?php echo $ruangan_item->nama; ?></a> -->
+                                                        <a href="<?php echo base_url('user/ruangan/detail/' . $ruangan_item->kode); ?>"><?php echo $ruangan_item->nama; ?></a>
+                                                        <!-- <a href="detail.html"><?php echo $ruangan_item->nama; ?></a> -->
                                                     </div>
                                                     <div>
                                                         <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $key; ?>"><i class="fas fa-pencil"></i></button>

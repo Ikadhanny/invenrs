@@ -1,37 +1,42 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+require_once APPPATH . 'third_party/dompdf/autoload.php';
+
+use Dompdf\Dompdf;
+
 class PdfController extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        // Load required libraries and helpers
-        $this->load->helper('download');
     }
 
-    public function downloadPDF()
+    public function exportPdf()
     {
-        // Path to the PDF file
-        $pdfFilePath = 'path/to/your/pdf/file.pdf';
+        // Load the Dompdf library
+        require_once APPPATH . 'third_party/dompdf/autoload.php';
 
-        // Check if the file exists
-        if (file_exists($pdfFilePath)) {
-            // Set the headers for force download
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($pdfFilePath) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($pdfFilePath));
-            readfile($pdfFilePath);
-            exit;
-        } else {
-            // If the file does not exist, show an error message or redirect as desired
-            echo 'File Tidak Tersedia';
-        }
+        // Load the AlatModel
+        $this->load->model('AlatModel');
+
+        // Generate PDF content
+        $pdf = new Dompdf();
+
+        $data['alat'] = $this->AlatModel->getDaftarAlat('subRuang');
+
+        $this->load->view('exportPDF', $data);
+
+        $paper_size = 'A4';
+        $orientation = 'portain';
+        $html = $this->output->get_output();
+        $pdf->set_paper($paper_size, $orientation);
+
+        $pdf->load_html($html);
+        $pdf->render();
+
+        // Output the generated PDF to Browser
+        $pdf->stream("Daftar_Alat.pdf", array('Attachment' => 0));
     }
-   
 }
